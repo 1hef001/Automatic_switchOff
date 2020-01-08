@@ -2,7 +2,7 @@ import idleTime as q
 from subprocess import Popen, PIPE
 import os
 import winDep as l
-import psutil
+
 
 
 while True:
@@ -11,9 +11,6 @@ while True:
         print(time)
     os.system('cls')
     if(int(time)==l.TIME):
-        for proc in psutil.process_iter():
-            proc.kill()
-        
         p = Popen(l.FILENAME,shell=True,cwd=l.PATH,stdout=PIPE).stdout
         stdout, stderr = p.communicate()
     else:
