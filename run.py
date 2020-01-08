@@ -1,15 +1,20 @@
 import idleTime as q
-from subprocess import Popen
+from subprocess import Popen, PIPE
 import os
-# name = 
+import winDep as l
+import psutil
+
 
 while True:
     time = q.get_idle_duration()
-    if (time < 1800):
+    if (time < l.TIME):
         print(time)
     os.system('cls')
-    if(int(time)==1800):
-        p = Popen("terminateFile.bat", cwd=r"C:\Users\Exam\Desktop\test\Remote_switchOff-master")
+    if(int(time)==l.TIME):
+        for proc in psutil.process_iter():
+            proc.kill()
+        
+        p = Popen(l.FILENAME,shell=True,cwd=l.PATH,stdout=PIPE).stdout
         stdout, stderr = p.communicate()
     else:
         print("Press CTRL+C to stop shutdown")
